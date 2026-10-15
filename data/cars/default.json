@@ -1,0 +1,19 @@
+{
+  "_comment": "Soft-body car from the original initVehicle(): 7 point masses joined by 17 distance springs. 'wheel' points get a radius from wheelRadius. gravityMul scales planet gravity per point. collide=false points pass through the ground. breakOnCrash lists springs removed when the car is wrecked. koAngle/flipAngle are the crash checks from angleConstrain().",
+  "wheelRadius": { "rear": 23, "front": 17 },
+  "points": [
+    { "x": 0,  "y": 0,   "wheel": "rear",  "gravityMul": 3,          "collide": true },
+    { "x": 80, "y": 0,   "wheel": "front", "gravityMul": 3,          "collide": true },
+    { "x": 20, "y": -22, "gravityMul": 0.2222222, "collide": false },
+    { "x": 60, "y": -22, "gravityMul": 0.2222222, "collide": false },
+    { "x": 10, "y": -42, "gravityMul": 0.1666667, "collide": true },
+    { "x": 70, "y": -42, "gravityMul": 0.1666667, "collide": true },
+    { "x": 40, "y": -58, "gravityMul": 0.1,       "collide": true }
+  ],
+  "springs": [[4,2],[5,3],[2,3],[0,4],[1,5],[4,5],[0,5],[1,4],[2,5],[2,4],[3,4],[3,5],[0,1],[0,6],[1,6],[2,6],[3,6]],
+  "stiffness": 0.55,
+  "breakOnCrash": [0, 3, 13, 12, 6, 1, 4, 14, 7],
+  "bodyPoints": [2, 3, 4, 5],
+  "koAngle":   { "vertex": 1, "a": 0, "b": 4, "min": 28, "max": 34 },
+  "flipAngle": { "vertex": 5, "a": 0, "b": 1, "min": -120 }
+}

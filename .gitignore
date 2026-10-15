@@ -1,0 +1,9 @@
+# Build output
+.build/
+dist/
+# The asset pack is baked from each player's own planetracer.swf and is never committed or shipped.
+assets/
+# macOS
+.DS_Store
+# Python
+__pycache__/

@@ -1,0 +1,149 @@
+{
+  "_comment": "Add entries to any list to create new parts. 'art' picks the sprite set (chassis body_t<art>_c<color>, wheel tire_<art>, engine sound engine<art>). Original 2006 values.",
+  "engines": [
+    {
+      "id": "40hp",
+      "name": "40 HP",
+      "speed": 1.2,
+      "price": 2500,
+      "sound": 1
+    },
+    {
+      "id": "80hp",
+      "name": "80 HP",
+      "speed": 1.4,
+      "price": 10000,
+      "sound": 2
+    },
+    {
+      "id": "140hp",
+      "name": "140 HP turbo",
+      "speed": 1.9,
+      "price": 24000,
+      "sound": 3
+    },
+    {
+      "id": "superhp",
+      "name": "super-hp HP",
+      "speed": 5.0,
+      "price": 0,
+      "sound": 1
+    }
+  ],
+  "tires": [
+    {
+      "id": "low",
+      "name": "low grip",
+      "grip": 0.028,
+      "price": 200,
+      "art": 1
+    },
+    {
+      "id": "medium",
+      "name": "medium grip",
+      "grip": 0.02,
+      "price": 600,
+      "art": 2
+    },
+    {
+      "id": "high",
+      "name": "high grip",
+      "grip": 0.006,
+      "price": 1500,
+      "art": 3
+    }
+  ],
+  "chassis": [
+    {
+      "id": "casual",
+      "name": "casual",
+      "speed": 1.0,
+      "price": 4000,
+      "art": 1,
+      "wheelTints": [
+        "#FF0000",
+        "#FF0000",
+        "#3399FF",
+        "#333333",
+        "#9966FF",
+        "#FFFF00",
+        "#FF33FF",
+        "#009900",
+        "#660066",
+        "#FF9900",
+        "#009900",
+        "#FFFF00",
+        "#FFFFFF",
+        "#CCCCCC"
+      ]
+    },
+    {
+      "id": "sports",
+      "name": "sports",
+      "speed": 1.2,
+      "price": 11000,
+      "art": 2,
+      "wheelTints": [
+        "#FF0000",
+        "#000000",
+        "#D700D7",
+        "#009900",
+        "#CCCCCC",
+        "#FFFF00",
+        "#FFFF00",
+        "#FF9900",
+        "#000000",
+        "#0033FF",
+        "#996600",
+        "#FF3399",
+        "#999999",
+        "#0000FF",
+        "#0000FF"
+      ]
+    },
+    {
+      "id": "race",
+      "name": "race",
+      "speed": 1.5,
+      "price": 28000,
+      "art": 3,
+      "wheelTints": [
+        "#FF0000",
+        "#FFFF00",
+        "#FF0000",
+        "#FF6600",
+        "#FFFFFF",
+        "#9966FF",
+        "#333333",
+        "#0087E1",
+        "#FF6600",
+        "#00CC33",
+        "#CC3366",
+        "#CCCCCC",
+        "#990000",
+        "#FF66FF",
+        "#CCCCCC"
+      ]
+    }
+  ],
+  "afterburners": [
+    {
+      "id": "1l",
+      "name": "1 liter",
+      "seconds": 10,
+      "price": 1000
+    },
+    {
+      "id": "2.5l",
+      "name": "2,5 liter",
+      "seconds": 25,
+      "price": 3000
+    },
+    {
+      "id": "5l",
+      "name": "5 liter",
+      "seconds": 50,
+      "price": 6000
+    }
+  ]
+}
