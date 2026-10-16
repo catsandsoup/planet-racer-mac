@@ -3,12 +3,12 @@ import Observation
 import PlanetRacerCore
 
 enum Screen: Hashable {
-    case title, quickRace, settings, race, error
+    case title, quickRace, mods, settings, race, error
     case newCareer, loadCareer, garage, shop, planets, rival, instructions // career
 }
 enum RacePhase { case playing, paused, pauseSettings, results }
 enum MenuContext: Hashable {
-    case title, quickRace, settings, pause, results
+    case title, quickRace, mods, settings, pause, results
     case newCareer, loadCareer, garage, shop, planets, rival, instructions, dialog
 }
 
@@ -43,6 +43,7 @@ final class GameModel {
     var phase = RacePhase.playing
     var focus = 0
     var settings = Settings.load()
+    var activeMod: BundledMod?
     var errorText = ""
     var pauseNote = ""
     var device = InputDevice.keyboard
@@ -66,6 +67,8 @@ final class GameModel {
     var loadAction = [Int](repeating: 0, count: Careers.slots) // per slot: 0 load, 1 delete
 
     // ---- engine state (not observed)
+    @ObservationIgnored var unmoddedGame: OpaquePointer?
+    @ObservationIgnored var unmoddedChoices: RaceChoices?
     @ObservationIgnored var game: OpaquePointer?
     @ObservationIgnored var assets: Assets?
     @ObservationIgnored var audio: Audio?
@@ -92,6 +95,11 @@ final class GameModel {
 
     /// Focus on the screen itself; while a dialog is open this is where the screen's focus will return to.
     var screenFocus: Int { dialog == nil ? focus : (lastFocus[screen] ?? 0) }
+
+    deinit {
+        if let original = unmoddedGame { pr_destroy(original) }
+        if let current = game { pr_destroy(current) }
+    }
 
     var choices: RaceChoices {
         get { settings.race }
@@ -140,6 +148,7 @@ final class GameModel {
 
     func save() {
         var s = settings
+        if let originalChoices = unmoddedChoices { s.race = originalChoices }
         if ShotScript.enabled { s.lastCareerSlot = Settings.load().lastCareerSlot } // throwaway careers stay out of the player's settings
         s.save()
     }
@@ -187,6 +196,7 @@ final class GameModel {
         switch screen {
         case .title: return .title
         case .quickRace: return .quickRace
+        case .mods: return .mods
         case .settings: return .settings
         case .newCareer: return .newCareer
         case .loadCareer: return .loadCareer
@@ -210,6 +220,10 @@ final class GameModel {
         switch ctx {
         case .title:
             return titleEntries.enumerated().map { MenuItem(id: $0.offset, label: $0.element.0) }
+        case .mods:
+            return BundledMod.allCases.enumerated().map {
+                MenuItem(id: $0.offset, label: $0.element.name, help: $0.element.detail)
+            } + [MenuItem(id: 3, label: "BACK")]
         case .quickRace:
             guard game != nil else { return [] }
             let c = choices
@@ -297,6 +311,9 @@ final class GameModel {
         case .title:
             guard row < titleEntries.count else { return }
             titleEntries[row].1()
+        case .mods:
+            if BundledMod.allCases.indices.contains(row) { openMod(BundledMod.allCases[row]) }
+            else { go(.title) }
         case .quickRace:
             if row == 9 { go(.title) } else { startRace() }
         case .settings:
@@ -334,7 +351,7 @@ final class GameModel {
     func back(_ ctx: MenuContext) {
         switch ctx {
         case .title: break
-        case .quickRace: go(.title)
+        case .quickRace, .mods: go(.title)
         case .settings:
             save()
             if screen == .race { phase = .paused; focus = careerRace ? 1 : 2 } else { go(settingsReturn) }
@@ -351,6 +368,7 @@ final class GameModel {
 
     /// Changes screen, remembering where the focus was on the one we leave.
     func go(_ s: Screen, focus f: Int? = nil) {
+        if s == .title { restoreOriginalGame() }
         lastFocus[screen] = focus
         screen = s
         focus = f ?? lastFocus[s] ?? 0

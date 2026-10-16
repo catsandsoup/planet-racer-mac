@@ -1,0 +1,90 @@
+{
+  "_comment": "surface = bumpiness 0-100, gravity per physics tick, size = race length in units (finish line x). Add 'map' to use a hand-built track instead of the procedural generator. 'image' is the globe shown in menus (assets/ui/<image>.png).",
+  "planets": [
+    {
+      "id": 1,
+      "name": "Planet 1",
+      "surface": 98,
+      "gravity": 0.21,
+      "size": 18000,
+      "travelCost": 3000,
+      "difficulty": 0.66,
+      "fillColor": "#B7C5D9",
+      "lineColor": "#A5B6CF",
+      "buildings": "buildings1",
+      "description": "Not many dare to race on this planet.",
+      "image": "planet_purple"
+    },
+    {
+      "id": 2,
+      "name": "Planet 2",
+      "surface": 66,
+      "gravity": 0.19,
+      "size": 14000,
+      "travelCost": 1500,
+      "difficulty": 0.8,
+      "fillColor": "#FFB3B3",
+      "lineColor": "#FFCACA",
+      "buildings": "buildings2",
+      "description": "This is not for rookies.",
+      "image": "planet_red"
+    },
+    {
+      "id": 3,
+      "name": "Planet 3",
+      "surface": 54,
+      "gravity": 0.24,
+      "size": 8000,
+      "travelCost": 400,
+      "difficulty": 0.91,
+      "fillColor": "#BDB9D0",
+      "lineColor": "#CECCDD",
+      "buildings": "buildings3",
+      "description": "Reputations are built on this planet.",
+      "image": "planet_violet"
+    },
+    {
+      "id": 4,
+      "name": "Planet 4",
+      "surface": 76,
+      "gravity": 0.28,
+      "size": 10000,
+      "travelCost": 800,
+      "difficulty": 0.81,
+      "fillColor": "#CECECE",
+      "lineColor": "#DDDDDD",
+      "buildings": "buildings4",
+      "description": "Be carefull on those hills.",
+      "image": "planet_grey"
+    },
+    {
+      "id": 5,
+      "name": "The Moon (King)",
+      "surface": 82,
+      "gravity": 0.24,
+      "size": 30000,
+      "travelCost": 100000,
+      "difficulty": 0.65,
+      "fillColor": "#C8EAC6",
+      "lineColor": "#E2F4E1",
+      "buildings": "king",
+      "description": "Become King to set a high score.",
+      "image": "planet_orange"
+    },
+    {
+      "id": 6,
+      "name": "Big Wheels",
+      "surface": 70,
+      "gravity": 0.24,
+      "size": 4000,
+      "travelCost": 0,
+      "difficulty": 0.85,
+      "fillColor": "#D9C7A6",
+      "lineColor": "#E8DBC2",
+      "buildings": "buildings3",
+      "description": "Oversized buggy: roll through sawtooth ridges, dips and a modest climb.",
+      "map": "maps/big-wheels.json",
+      "image": "planet_orange"
+    }
+  ]
+}

@@ -25,6 +25,7 @@ let package = Package(
             dependencies: ["PlanetRacerCore"],
             path: "Sources/RaceSim"
         ),
+        .testTarget(name: "PlanetRacerTests", dependencies: ["PlanetRacer", "PlanetRacerCore"]),
     ],
     cxxLanguageStandard: .cxx17
 )

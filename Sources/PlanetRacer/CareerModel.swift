@@ -35,6 +35,7 @@ extension GameModel {
         out.append(("NEW CAREER", { [unowned self] in newCareer() }))
         out.append(("LOAD CAREER", { [unowned self] in titleNote = ""; go(.loadCareer, focus: 0) }))
         out.append(("QUICK RACE", { [unowned self] in titleNote = ""; rebuildOpponents(); go(.quickRace) }))
+        out.append(("MODS", { [unowned self] in titleNote = ""; go(.mods, focus: 0) }))
         out.append(("SETTINGS", { [unowned self] in titleNote = ""; settingsReturn = .title; go(.settings) }))
         out.append(("QUIT", { NSApp.terminate(nil) }))
         return out

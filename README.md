@@ -33,7 +33,36 @@ The game pauses by itself when the window goes to the background or the controll
 
 - **Career**: the original game. Start with a 40 HP car and $10,000 (more on Easy, less on Hard) and work your way up to the King of the Moon. See below.
 - **Quick Race**: pick a planet, rival, difficulty, engine, afterburner, chassis, paint and tires, then race. On the Moon you race the King.
-- Not yet: the high-score game, the map editor, mod folders. See the roadmap below.
+- **Mods**: three bundled Quick Race variations: Moonshot, Jelly Racer and Big Wheels.
+- Not yet: the high-score game and the map editor. See the roadmap below.
+
+## Bundled mods
+
+![Bundled mods menu](docs/screenshots/mods-menu.png)
+
+From the title screen, choose **MODS**, then **Moonshot**, **Jelly Racer** or **Big Wheels**. This opens Quick Race on the pack's sixth planet with the recommended preset: Everett, Easy, 80 HP engine, sports chassis, high-grip tires and the 5-litre afterburner. Adjust your setup in Quick Race, then race and use **Race Again** to try another line or boost timing.
+
+Returning to the title screen restores the base game automatically and preserves your career. The packs are for Quick Race; they do not modify careers. Their car settings apply to both racers and other tracks while the pack is active. The bundled mods change JSON content; no physics algorithms are changed.
+
+### Moonshot
+
+Lower gravity gives floaty launches and more time to correct a landing. The handmade course has a broad first landing and a second jump.
+
+![Moonshot in a driving session](docs/screenshots/moonshot.png)
+
+### Jelly Racer
+
+Softer springs make the existing car flex over shallow ridges, followed by a gentle drop and room to settle.
+
+![Jelly Racer in Original framing](docs/screenshots/jelly-racer.png)
+
+### Big Wheels
+
+Larger tires give the existing car an oversized buggy stance over sawtooth ridges, rolling dips and a modest climb.
+
+![Big Wheels on its handmade course](docs/screenshots/big-wheels.png)
+
+These are short courses: measured successful runs take roughly **8–13 seconds** with the recommended setup. The screenshots show actual driving sessions; they are not rendered mockups. Gravity, terrain, spring stiffness and wheel sizes remain tunable data in [`mods/`](mods/README.md). The packs reuse the assets baked from your own SWF; no baked asset pack is included in the repository.
 
 ## Career
 
@@ -73,7 +102,9 @@ Sources/PlanetRacerCore/   C++17: data loading, soft-body physics, terrain, race
 Sources/PlanetRacer/       Swift: SwiftUI menus, Metal renderer, GameController input, AVFoundation audio
 Sources/RaceSim/           headless race simulator through the same C interface (physics regression test)
 tools/                     asset bake from a decompiled planetracer.swf
-data/                      game data (JSON)
+data/                      base-game data (JSON)
+mods/                      bundled Quick Race data packs (JSON)
+docs/screenshots/          real driving screenshots of the bundled mods
 ```
 
 ### 1. Bake the asset pack from your SWF
@@ -109,11 +140,26 @@ swift build -c release --product RaceSim && .build/release/RaceSim data 20
 
 The career rules are in `Sources/PlanetRacerCore/career.cpp` (createNewGame, initGarage, clickOkRepair, the shop, clickOkTravel, initOpponents, manageAmount/negotiate, manageEarnings, manageReputation, storeDamage, checkForTrouble), exposed as `pr_career_*` in the C header. The Swift side (`CareerModel.swift`, `CareerScreens.swift`) only shows state and forwards choices.
 
+### Integration tests
+
+```bash
+swift test
+swift build -c release --product RaceSim
+.build/release/RaceSim data 20
+.build/release/RaceSim mods/moonshot/data 20
+.build/release/RaceSim mods/jelly-racer/data 20
+.build/release/RaceSim mods/big-wheels/data 20
+```
+
+The model tests cover the Mods entry, loading every pack, restoring the original core and career, preserving the base Quick Race choices when saving settings, and a missing-pack error. They use a separate `.build/test-user` settings directory. Core smoke tests allow ordinary crashes and do not prove human replay appeal or full career progression.
+
+For native integration captures, set `PLANETRACER_SHOTS=<folder>` and `PLANETRACER_SHOT_MOD=moonshot` (or `jelly-racer` / `big-wheels`) when launching the app. `PLANETRACER_USER_DIR=<temporary folder>` isolates all test preferences from the player's files. The app's resource bundle contains all three packs; no resource-root override is needed for normal play.
+
 ### Roadmap
 
 1. ~~Career mode~~ (done: garage, wear and repairs, shop, betting and pink slips, reputation, travel, the King).
 2. The original's high-score game (three rounds on planets 3, 2, 4) with a local high-score table.
 3. Import `planetracer.swf` from inside the app on first launch (no Java/Python), so the app can be shared.
 4. Controller rebinding and a Controls page; a mute key.
-5. Map editor and hand-built planets in the menus; mod folders.
+5. Map editor and arbitrary mod-folder import. Three hand-built Quick Race mods are already bundled.
 6. Web and Windows front ends over the same C++ core.

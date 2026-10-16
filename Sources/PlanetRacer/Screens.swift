@@ -9,6 +9,7 @@ struct OverlayView: View {
             switch model.screen {
             case .title: TitleScreen(model: model)
             case .quickRace: QuickRaceScreen(model: model)
+            case .mods: ModsScreen(model: model)
             case .settings: SettingsScreen(model: model, overlay: false)
             case .race:
                 HudOverlay(model: model)

@@ -65,6 +65,12 @@ enum Paths {
     }()
 
     static let userDir: URL = {
+        // Keep automated model/screenshot tests out of the player's preferences and careers.
+        if let path = ProcessInfo.processInfo.environment["PLANETRACER_USER_DIR"] {
+            let dir = URL(fileURLWithPath: path, isDirectory: true)
+            try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            return dir
+        }
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let dir = base.appendingPathComponent("Planet Racer", isDirectory: true)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)

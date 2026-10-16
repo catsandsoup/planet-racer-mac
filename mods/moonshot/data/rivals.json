@@ -1,0 +1,69 @@
+{
+  "_comment": "What rivals say when they pull up (getSentence in the original). Add or change lines freely; each list needs at least one entry. sentence/weird: a normal money offer. car: they want to race for pink slips. decline/temper/chicken: they won't race you. king: the King, when you challenge. youking: a challenger, when you are the King.",
+  "sentence": [
+    "I feel lucky today. Let's race.",
+    "You look a bit pale, I think I will beat you today",
+    "Yeah, lets race, how exiting",
+    "Let's go.",
+    "I feel a little weak today. You'll probably beat me, but let's go anyway.",
+    "I'm on a winning steak. Let's go.",
+    "You look like you have a hangover. Dare to challenge me?",
+    "You look like you are about to lose you next race",
+    "You can't beat me today.",
+    "I don't race against creatures as ugly as you. But I'll make an exception.",
+    "If you want to build a reputation, try to beat me.",
+    "Huh, what?? race? Ok, lets go..",
+    "I could use some exercise, let's go for it",
+    "Let's go, I want to win some cash before I go home.",
+    "So you think you can beat me with that??? Good luck. You'll need it",
+    "You don't stand a chance against me.",
+    "I hear you have quite a reputation, let's go."
+  ],
+  "decline": [
+    "Who are you? Why would I want to race against you?",
+    "Only in your dreams chipmunk",
+    "So, why would I waste my time racing you, eh?",
+    "Not today, come back when you build a reputation",
+    "I'm not here for charity pal.",
+    "You are not worthy scratching my car over",
+    "I don't race babies",
+    "I only race intelligent lifeforms",
+    "I don't race beginners",
+    "I only race against pro's"
+  ],
+  "chicken": [
+    "I thank thee for the honour, but I'd rather not.",
+    "No, not at this point",
+    "I feel luck is not with me today"
+  ],
+  "temper": ["...", "grrrwwrrr", "I don't like you", "Get lost!", "You again?", "Go home!", "Punk!"],
+  "car": [
+    "Your car, I want it",
+    "It looks like you will be walking home tonight.",
+    "Take a look at my car. You want it? Come and get it",
+    "I like your car",
+    "I feel like taking a gamble today. Let's race for the car.",
+    "You look like you are about to lose you car"
+  ],
+  "weird": [
+    "You can beat me, easily. Really.",
+    "Haha, hik, yup, hik.",
+    "Once, I will be the King.",
+    "I will be the next King.",
+    "I defeated the King once. Hihi, Yup hehe. Hik.",
+    "If you want to race like a monk you have got to live like a monk.",
+    "I will wear the crown someday."
+  ],
+  "king": [
+    "What makes you think you can defeat the King?",
+    "I know what you want, you can't have it.",
+    "Many have failed, why would it be different this time?",
+    "You challenging me is an insult. You shall be defeated.",
+    "This crown could be yours. To bad you cannot beat me."
+  ],
+  "youking": [
+    "You are not worthy of the crown, I will take it from you.",
+    "Your crown, your precious crown...",
+    "Your car, your crown, and the palace are mine!"
+  ]
+}

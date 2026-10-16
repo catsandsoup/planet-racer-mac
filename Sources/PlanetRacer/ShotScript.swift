@@ -16,8 +16,15 @@ enum ShotScript {
         let f = m.frameCount
         let race = 36 * 6 // ~6 s of racing at 60 fps
         switch f {
-        case 60: pendingCapture = "1_title.png"
-        case 61: m.titleEntries.first { $0.0 == "QUICK RACE" }?.1()
+        case 60:
+            if ProcessInfo.processInfo.environment["PLANETRACER_SHOT_MOD"] != nil {
+                m.go(.mods, focus: 0)
+                pendingCapture = "1_mods.png"
+            } else { pendingCapture = "1_title.png" }
+        case 61:
+            if let name = ProcessInfo.processInfo.environment["PLANETRACER_SHOT_MOD"],
+               let mod = BundledMod(rawValue: name) { m.openMod(mod) }
+            else { m.titleEntries.first { $0.0 == "QUICK RACE" }?.1() }
         case 100: pendingCapture = "2_quickrace.png"
         case 101: m.startRace()
         case 140: pendingCapture = "3_race_start.png"
